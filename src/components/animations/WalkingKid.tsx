@@ -53,11 +53,11 @@ function KidSVG({ walking, flip }: { walking: boolean; flip: boolean }) {
       {/* Shadow */}
       <ellipse cx="40" cy="110" rx="28" ry="5" fill="rgba(0,0,0,0.18)"/>
 
-      {/* BACKPACK */}
-      <rect x="52" y="60" width="18" height="24" rx="6" fill="url(#cBag)"/>
-      <rect x="55" y="55" width="12" height="8"  rx="4" fill="url(#cBag)" opacity="0.9"/>
-      <rect x="56" y="72" width="10" height="7"  rx="3" fill="rgba(255,255,255,0.22)"/>
-      <ellipse cx="57" cy="65" rx="3" ry="2" fill="rgba(255,255,255,0.22)"/>
+      {/* BACKPACK — left side = character's back when walking right */}
+      <rect x="10" y="60" width="18" height="24" rx="6" fill="url(#cBag)"/>
+      <rect x="13" y="55" width="12" height="8"  rx="4" fill="url(#cBag)" opacity="0.9"/>
+      <rect x="14" y="72" width="10" height="7"  rx="3" fill="rgba(255,255,255,0.22)"/>
+      <ellipse cx="23" cy="65" rx="3" ry="2" fill="rgba(255,255,255,0.22)"/>
 
       {/* LEFT ARM */}
       <g style={{ transformBox:'fill-box', transformOrigin:'50% 8%', animation:`cAL ${dur} ${inf}` }}>
