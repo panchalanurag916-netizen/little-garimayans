@@ -21,7 +21,6 @@ const features = [
 const timings = [
   { title:'Standard Day',   time:'7:00 AM – 1:00 PM',   desc:'Includes preschool program + lunch' },
   { title:'Extended Day',   time:'7:00 AM – 4:00 PM',   desc:'Standard + afternoon activities & snack' },
-  { title:'Full Day',       time:'7:00 AM – 7:00 PM',   desc:'Full daycare with dinner option' },
 ]
 
 export default function DaycarePage() {

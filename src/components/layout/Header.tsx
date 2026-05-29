@@ -61,7 +61,7 @@ export function Header() {
             <LogoSVG className="w-11 h-auto transition-transform duration-300 group-hover:scale-105" />
             <div className={cn('leading-tight transition-colors duration-300', scrolled || !isHome ? 'text-brand-dark' : 'text-white')}>
               <span className="block text-xs font-semibold tracking-widest uppercase opacity-70 font-body">The Little</span>
-              <span className="block text-lg font-display font-bold text-brand-red">Garimayans</span>
+              <span className="block text-lg font-body font-bold text-brand-red">Garimayans</span>
             </div>
           </Link>
 
@@ -120,7 +120,7 @@ export function Header() {
             )}
             <Link
               href="/admissions"
-              className="ml-2 px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-brand-red to-brand-pink text-white shadow-brand hover:shadow-brand-pink hover:-translate-y-0.5 transition-all duration-300 font-display"
+              className="ml-2 px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-brand-red to-brand-pink text-white shadow-brand hover:shadow-brand-pink hover:-translate-y-0.5 transition-all duration-300 font-body"
             >
               Enroll Now ✨
             </Link>
@@ -129,7 +129,7 @@ export function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={cn('lg:hidden p-2 rounded-xl transition-colors', scrolled || !isHome ? 'text-brand-dark' : 'text-white')}
+            className={cn('lg:hidden p-2 rounded-xl transition-colors', scrolled || !isHome || menuOpen ? 'text-brand-dark' : 'text-white')}
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -163,7 +163,7 @@ export function Header() {
                     <Link
                       key={link.href}
                       href={link.href!}
-                      className="block px-4 py-3 text-xl font-bold text-brand-dark hover:text-brand-red hover:bg-brand-cream rounded-xl transition-colors font-display"
+                      className="block px-4 py-3 text-xl font-bold text-brand-dark hover:text-brand-red hover:bg-brand-cream rounded-xl transition-colors font-body"
                     >
                       {link.label}
                     </Link>
@@ -171,10 +171,10 @@ export function Header() {
                 )}
               </nav>
               <div className="mt-auto pt-8 flex flex-col gap-3">
-                <Link href="/admissions" className="block text-center py-4 rounded-2xl font-bold text-white bg-gradient-to-r from-brand-red to-brand-pink text-lg font-display">
+                <Link href="/admissions" className="block text-center py-4 rounded-2xl font-bold text-white bg-gradient-to-r from-brand-red to-brand-pink text-lg font-body">
                   ✨ Enroll Your Child
                 </Link>
-                <Link href="/franchise" className="block text-center py-4 rounded-2xl font-bold text-brand-dark border-2 border-brand-gold text-lg font-display">
+                <Link href="/franchise" className="block text-center py-4 rounded-2xl font-bold text-brand-dark border-2 border-brand-gold text-lg font-body">
                   🏫 Own a Franchise
                 </Link>
               </div>

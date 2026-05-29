@@ -29,7 +29,6 @@ export function HeroSection() {
     const onMove = (e: MouseEvent) => {
       const nx = (e.clientX / window.innerWidth  - 0.5) * 2
       const ny = (e.clientY / window.innerHeight - 0.5) * 2
-      /* far layer moves slowest → nearest moves fastest */
       gsap.to(farRef.current,  { x: nx*10,  y: ny*7,  duration:2.0, ease:'power2.out' })
       gsap.to(midRef.current,  { x: nx*22,  y: ny*14, duration:1.6, ease:'power2.out' })
       gsap.to(nearRef.current, { x: nx*38,  y: ny*24, duration:1.2, ease:'power2.out' })
@@ -42,88 +41,55 @@ export function HeroSection() {
     <section
       ref={sectionRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden"
-      style={{ background: '#060215' }}
+      style={{ background: 'linear-gradient(160deg, #FFFBF5 0%, #FFF5EC 50%, #F5F0FF 100%)' }}
     >
 
-      {/* ══ DEPTH LAYER 1 — FAR BACKGROUND (sky + nebula) ══════ */}
+      {/* ══ DEPTH LAYER 1 — FAR (large soft color orbs) ══════ */}
       <div ref={farRef} className="absolute inset-[-8%] z-[1] will-change-transform pointer-events-none">
-        {/* Base cosmic sky */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 100% 90% at 50% 110%, #0a1f40 0%, #0c0830 40%, #060215 80%)',
+        {/* Warm gold top-center */}
+        <div className="absolute" style={{
+          top:'-10%', left:'15%', width:700, height:700, borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(250,162,27,0.18) 0%, transparent 65%)',
+          filter:'blur(70px)', animation:'orb-pulse 12s ease-in-out infinite',
         }}/>
-        {/* Golden horizon glow */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 80% 40% at 50% 100%, rgba(250,162,27,0.22) 0%, transparent 60%)',
+        {/* Teal right */}
+        <div className="absolute" style={{
+          top:'25%', right:'-5%', width:550, height:550, borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(23,153,143,0.14) 0%, transparent 65%)',
+          filter:'blur(75px)', animation:'orb-pulse 9s 2s ease-in-out infinite',
         }}/>
-        {/* Purple aurora top */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 120% 50% at 50% -10%, rgba(120,40,180,0.20) 0%, transparent 60%)',
+        {/* Pink bottom-left */}
+        <div className="absolute" style={{
+          bottom:'0%', left:'-5%', width:500, height:500, borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(238,56,105,0.13) 0%, transparent 65%)',
+          filter:'blur(65px)', animation:'orb-pulse 11s 1s ease-in-out infinite',
         }}/>
-        {/* Teal aurora right */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 50% 60% at 100% 40%, rgba(23,153,143,0.16) 0%, transparent 60%)',
+        {/* Blue bottom-right */}
+        <div className="absolute" style={{
+          bottom:'15%', right:'8%', width:380, height:380, borderRadius:'50%',
+          background:'radial-gradient(circle, rgba(45,93,138,0.10) 0%, transparent 65%)',
+          filter:'blur(55px)', animation:'orb-pulse 10s 3s ease-in-out infinite',
         }}/>
-        {/* Pink left glow */}
-        <div className="absolute inset-0" style={{
-          background: 'radial-gradient(ellipse 45% 55% at 0% 60%, rgba(238,56,105,0.14) 0%, transparent 60%)',
-        }}/>
-
-        {/* ── Tiny star field ── */}
-        {Array.from({length:60},(_,i)=>({
-          x: (i*37+13)%100, y: (i*53+7)%100,
-          s: i%5===0?2.5:i%3===0?2:1.5,
-          o: 0.4+((i*17)%60)/100,
-          d: 1.5+(i*0.12)%2.5,
-        })).map((st,i)=>(
-          <div key={i} className="absolute rounded-full bg-white" style={{
-            left:`${st.x}%`, top:`${st.y}%`,
-            width:st.s, height:st.s, opacity:st.o,
-            animation:`twinkle ${st.d}s ${(i*0.11)%3}s ease-in-out infinite`,
-          }}/>
-        ))}
       </div>
 
-      {/* ══ DEPTH LAYER 2 — MID (nebula clouds + large orbs) ═══ */}
+      {/* ══ DEPTH LAYER 2 — MID (medium floating blobs) ═══ */}
       <div ref={midRef} className="absolute inset-[-6%] z-[2] will-change-transform pointer-events-none">
-        {/* Big nebula cloud top-left */}
-        <div className="absolute" style={{
-          top:'-5%', left:'-8%', width:'55%', height:'55%',
-          background:'radial-gradient(ellipse, rgba(100,30,200,0.18) 0%, rgba(40,10,120,0.08) 50%, transparent 70%)',
-          filter:'blur(30px)',
-          animation:'drift-right 18s ease-in-out infinite',
-        }}/>
-        {/* Orange-gold nebula bottom-right */}
-        <div className="absolute" style={{
-          bottom:'-8%', right:'-6%', width:'60%', height:'50%',
-          background:'radial-gradient(ellipse, rgba(250,120,20,0.16) 0%, rgba(200,80,10,0.06) 50%, transparent 70%)',
-          filter:'blur(35px)',
-          animation:'drift-left 22s ease-in-out infinite',
-        }}/>
-        {/* Teal nebula mid-right */}
-        <div className="absolute" style={{
-          top:'20%', right:'-4%', width:'40%', height:'40%',
-          background:'radial-gradient(ellipse, rgba(23,153,143,0.15) 0%, transparent 65%)',
-          filter:'blur(28px)',
-          animation:'orb-pulse 10s ease-in-out infinite',
-        }}/>
-        {/* Floating large translucent spheres */}
         {[
-          {c:'rgba(250,162,27,0.12)', s:240, t:'8%',  l:'5%',  dur:9, dl:0  },
-          {c:'rgba(238,56,105,0.10)', s:180, t:'55%', l:'82%', dur:12,dl:1.5},
-          {c:'rgba(23,153,143,0.10)', s:160, t:'70%', l:'5%',  dur:8, dl:0.8},
-          {c:'rgba(45,93,138,0.12)',  s:200, t:'5%',  l:'75%', dur:11,dl:2  },
+          {c:'rgba(250,162,27,0.16)', s:220, t:'8%',  l:'5%',  dur:9,  dl:0  },
+          {c:'rgba(238,56,105,0.12)', s:170, t:'55%', l:'82%', dur:12, dl:1.5},
+          {c:'rgba(23,153,143,0.13)', s:150, t:'70%', l:'5%',  dur:8,  dl:0.8},
+          {c:'rgba(45,93,138,0.11)',  s:190, t:'5%',  l:'75%', dur:11, dl:2  },
         ].map((o,i)=>(
           <div key={i} className="absolute rounded-full" style={{
             top:o.t, left:o.l, width:o.s, height:o.s,
-            background:o.c, filter:'blur(60px)',
+            background:o.c, filter:'blur(50px)',
             animation:`orb-pulse ${o.dur}s ${o.dl}s ease-in-out infinite`,
           }}/>
         ))}
       </div>
 
-      {/* ══ DEPTH LAYER 3 — NEAR (sparkles + accent glows) ═════ */}
+      {/* ══ DEPTH LAYER 3 — NEAR (sparkle stars + glow dots) ═════ */}
       <div ref={nearRef} className="absolute inset-[-4%] z-[3] will-change-transform pointer-events-none">
-        {/* Sparkle cross-stars */}
         {[
           {t:'12%',l:'10%',c:'#FAA21B',s:18,dl:0.3},{t:'20%',l:'88%',c:'#EE3869',s:14,dl:1.1},
           {t:'70%',l:'90%',c:'#17998F',s:16,dl:0.7},{t:'78%',l:'8%', c:'#FAA21B',s:14,dl:2.0},
@@ -134,79 +100,80 @@ export function HeroSection() {
             animation:`twinkle 3s ${cs.dl}s ease-in-out infinite`,
           }}>
             <svg viewBox="0 0 24 24" width={cs.s} height={cs.s}
-              style={{filter:`drop-shadow(0 0 6px ${cs.c})`}}>
+              style={{filter:`drop-shadow(0 0 5px ${cs.c})`}}>
               <path d="M12 2L13.8 9.2L21 12L13.8 14.8L12 22L10.2 14.8L3 12L10.2 9.2Z" fill={cs.c}/>
             </svg>
           </div>
         ))}
-        {/* Hot bright glow dots */}
+        {/* Glow dots */}
         {[
           {t:'15%',l:'18%',c:'#FAA21B',s:6},{t:'25%',l:'80%',c:'#EE3869',s:5},
           {t:'65%',l:'85%',c:'#17998F',s:6},{t:'72%',l:'14%',c:'#2D5D8A',s:5},
         ].map((d,i)=>(
           <div key={i} className="absolute rounded-full" style={{
             top:d.t, left:d.l, width:d.s, height:d.s, background:d.c,
-            boxShadow:`0 0 ${d.s*4}px ${d.s*2}px ${d.c}`,
+            boxShadow:`0 0 ${d.s*4}px ${d.s*2}px ${d.c}55`,
             animation:`twinkle ${2+i*0.4}s ${i*0.7}s ease-in-out infinite`,
           }}/>
         ))}
       </div>
 
-      {/* ══ Edge vignette for depth ══════════════════════════════ */}
+      {/* ══ Subtle dot grid pattern ══════════════════════════ */}
       <div className="absolute inset-0 z-[4] pointer-events-none" style={{
-        background:'radial-gradient(ellipse 85% 85% at 50% 50%, transparent 25%, rgba(4,1,20,0.70) 100%)',
+        backgroundImage:'radial-gradient(circle, rgba(250,162,27,0.12) 1px, transparent 1px)',
+        backgroundSize:'44px 44px',
       }}/>
 
-      {/* ══ BOTTOM LAYERED TERRAIN (CSS landscape depth) ════════ */}
+      {/* ══ BOTTOM LAYERED TERRAIN ════════════════════════════ */}
       <div className="absolute bottom-0 left-0 right-0 z-[6] pointer-events-none" style={{lineHeight:0}}>
         {/* Mountains far */}
         <svg viewBox="0 0 1440 160" preserveAspectRatio="none"
-          style={{display:'block',width:'100%',height:160,opacity:.12}}>
+          style={{display:'block',width:'100%',height:160,opacity:.07}}>
           <path d="M0,120 L180,40 L360,100 L540,20 L720,80 L900,30 L1080,90 L1260,45 L1440,85 L1440,160 L0,160Z"
-            fill="#4080C0"/>
+            fill="#FAA21B"/>
         </svg>
         {/* Hills mid */}
         <svg viewBox="0 0 1440 120" preserveAspectRatio="none"
-          style={{display:'block',width:'100%',height:120,marginTop:-80,opacity:.18}}>
+          style={{display:'block',width:'100%',height:120,marginTop:-80,opacity:.10}}>
           <path d="M0,80 C200,20 400,90 600,50 C800,15 1000,75 1200,45 C1340,25 1400,60 1440,50 L1440,120 L0,120Z"
             fill="#17998F"/>
         </svg>
         {/* Near hills */}
         <svg viewBox="0 0 1440 90" preserveAspectRatio="none"
-          style={{display:'block',width:'100%',height:90,marginTop:-55,opacity:.22}}>
+          style={{display:'block',width:'100%',height:90,marginTop:-55,opacity:.12}}>
           <path d="M0,60 C320,10 640,70 960,35 C1200,10 1360,55 1440,40 L1440,90 L0,90Z"
-            fill="#2D5D8A"/>
+            fill="#EE3869"/>
         </svg>
-        {/* Cream transition */}
+        {/* Cream transition — match AboutSection bg */}
         <svg viewBox="0 0 1440 80" preserveAspectRatio="none"
           style={{display:'block',width:'100%',height:80,marginTop:-40}}>
           <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80Z" fill="#FDFBF8"/>
         </svg>
       </div>
 
-      {/* ══════════════ HERO CONTENT ══════════════════════════════ */}
+      {/* ══════════════ HERO CONTENT ══════════════════════════ */}
       <div className="relative z-[10] text-center px-6 max-w-5xl mx-auto"
         style={{paddingTop:'7rem', paddingBottom:'9rem'}}>
 
         {/* Top badge */}
         <div className="h-badge inline-flex items-center gap-2 mb-8 px-5 py-2.5 rounded-full" style={{
-          background:'rgba(250,162,27,0.10)',
-          border:'1px solid rgba(250,162,27,0.40)',
+          background:'rgba(250,162,27,0.12)',
+          border:'1px solid rgba(250,162,27,0.45)',
           backdropFilter:'blur(14px)',
         }}>
-          <Sparkles className="w-4 h-4 text-yellow-400"/>
-          <span className="font-body text-yellow-300 text-xs font-bold tracking-[.18em] uppercase">
+          <Sparkles className="w-4 h-4 text-yellow-500"/>
+          <span className="font-body text-brand-red text-xs font-bold tracking-[.18em] uppercase">
             India&apos;s Most Loved Preschool Brand
           </span>
-          <Sparkles className="w-4 h-4 text-yellow-400"/>
+          <Sparkles className="w-4 h-4 text-yellow-500"/>
         </div>
 
-        {/* ── BIG DISPLAY HEADLINE (Lilita One) ── */}
+        {/* ── BIG DISPLAY HEADLINE ── */}
         <div style={{marginBottom:'0.3em'}}>
-          <div className="h-line1 font-hero text-white block leading-[1.0]"
+          <div className="h-line1 font-hero block leading-[1.0]"
             style={{
-              fontSize:'clamp(3.4rem,9vw,8.5rem)',
-              textShadow:'0 4px 0 rgba(0,0,0,.5), 0 8px 40px rgba(0,0,0,.4)',
+              fontSize:'clamp(4.4rem,11vw,11rem)',
+              color:'#1A1A2E',
               letterSpacing:'-0.01em',
             }}>
             Where Little
@@ -215,21 +182,21 @@ export function HeroSection() {
           {/* Animated gradient word */}
           <div className="h-line2 font-hero block leading-[0.95]"
             style={{
-              fontSize:'clamp(4.2rem,12vw,11.5rem)',
+              fontSize:'clamp(5.5rem,15vw,15rem)',
               background:'linear-gradient(135deg,#FAA21B 0%,#F5921A 30%,#EE3869 65%,#FAA21B 100%)',
               backgroundSize:'300% auto',
               WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
               animation:'gradient-text 4s ease infinite',
-              filter:'drop-shadow(0 4px 28px rgba(250,162,27,0.60))',
+              filter:'drop-shadow(0 4px 24px rgba(250,162,27,0.45))',
               letterSpacing:'-0.01em',
             }}>
             Dreams
           </div>
 
-          <div className="h-line3 font-hero text-white block leading-[1.0]"
+          <div className="h-line3 font-hero block leading-[1.0]"
             style={{
-              fontSize:'clamp(3.4rem,9vw,8.5rem)',
-              textShadow:'0 4px 0 rgba(0,0,0,.5), 0 8px 40px rgba(0,0,0,.4)',
+              fontSize:'clamp(4.4rem,11vw,11rem)',
+              color:'#1A1A2E',
               letterSpacing:'-0.01em',
             }}>
             Begin ✨
@@ -237,15 +204,15 @@ export function HeroSection() {
         </div>
 
         {/* Sub */}
-        <p className="h-sub font-body font-medium text-white/65 mx-auto mb-10 leading-relaxed"
+        <p className="h-sub font-body font-medium text-brand-soft mx-auto mb-10 leading-relaxed"
           style={{fontSize:'clamp(1rem,2vw,1.2rem)', maxWidth:520, marginTop:'1.5rem'}}>
           Nurturing India&apos;s future through the{' '}
           <span className="font-bold" style={{
             fontFamily:'var(--font-hero)', fontSize:'1.15em',
             background:'linear-gradient(135deg,#FAA21B,#17998F)',
             WebkitBackgroundClip:'text', WebkitTextFillColor:'transparent', backgroundClip:'text',
-          }}>SPACE</span>{' '}
-          framework — one magical childhood at a time.
+          }}>SPARK</span>{' '}
+          Curriculum — one magical childhood at a time.
         </p>
 
         {/* CTAs */}
@@ -254,17 +221,18 @@ export function HeroSection() {
             className="group inline-flex items-center gap-2.5 font-body font-bold text-white text-base rounded-full transition-all duration-300 hover:-translate-y-2 hover:scale-105"
             style={{padding:'14px 34px',
               background:'linear-gradient(135deg,#99292D,#EE3869)',
-              boxShadow:'0 8px 30px rgba(238,56,105,.50), 0 0 0 0 rgba(238,56,105,.3)',
+              boxShadow:'0 8px 30px rgba(238,56,105,.30)',
             }}>
             <Sparkles className="w-4 h-4"/> Book a School Tour
             <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1"/>
           </Link>
           <Link href="/programs"
-            className="inline-flex items-center gap-2 font-body font-bold text-white text-base rounded-full transition-all duration-300 hover:-translate-y-2"
+            className="inline-flex items-center gap-2 font-body font-bold text-brand-dark text-base rounded-full transition-all duration-300 hover:-translate-y-2"
             style={{padding:'14px 34px',
-              background:'rgba(255,255,255,0.08)',
-              border:'1.5px solid rgba(255,255,255,0.25)',
+              background:'rgba(255,255,255,0.85)',
+              border:'1.5px solid rgba(0,0,0,0.12)',
               backdropFilter:'blur(14px)',
+              boxShadow:'0 4px 20px rgba(0,0,0,0.08)',
             }}>
             Explore Programs
           </Link>
@@ -272,7 +240,7 @@ export function HeroSection() {
             className="inline-flex items-center gap-2 font-body font-bold text-[#1a1a1a] text-base rounded-full transition-all duration-300 hover:-translate-y-2 hover:scale-105"
             style={{padding:'14px 34px',
               background:'linear-gradient(135deg,#FAA21B,#F07D15)',
-              boxShadow:'0 8px 30px rgba(250,162,27,.45)',
+              boxShadow:'0 8px 30px rgba(250,162,27,.40)',
             }}>
             🏫 Own a Franchise
           </Link>
@@ -284,13 +252,13 @@ export function HeroSection() {
             {emoji:'👶',text:'5,000+ Happy Kids',     glow:'#EE3869'},
             {emoji:'🏆',text:'Award-Winning',          glow:'#FAA21B'},
             {emoji:'📍',text:'50+ Centers Pan India', glow:'#17998F'},
-            {emoji:'❤️',text:'CBSE Aligned',           glow:'#2D5D8A'},
+            {emoji:'❤️',text:'NCF-FS Aligned',          glow:'#2D5D8A'},
           ].map(({emoji,text,glow})=>(
-            <div key={text} className="h-trust flex items-center gap-2 font-body text-sm font-semibold text-white/80 rounded-full"
+            <div key={text} className="h-trust flex items-center gap-2 font-body text-sm font-semibold text-brand-dark rounded-full"
               style={{padding:'8px 18px',
-                background:'rgba(255,255,255,0.07)',
-                border:`1px solid ${glow}50`,
-                backdropFilter:'blur(12px)',
+                background:'rgba(255,255,255,0.85)',
+                border:`1px solid ${glow}40`,
+                boxShadow:'0 2px 12px rgba(0,0,0,0.07)',
               }}>
               <span style={{fontSize:16}}>{emoji}</span>
               <span>{text}</span>
@@ -300,7 +268,7 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-[88px] left-1/2 z-[10] flex flex-col items-center gap-1 text-white/40 text-xs font-body tracking-widest uppercase"
+      <div className="absolute bottom-[88px] left-1/2 z-[10] flex flex-col items-center gap-1 text-brand-soft text-xs font-body tracking-widest uppercase"
         style={{transform:'translateX(-50%)', animation:'bounce-soft 2.5s ease-in-out infinite'}}>
         <span>Scroll</span>
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
