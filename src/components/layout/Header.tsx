@@ -42,25 +42,19 @@ export function Header() {
 
   useEffect(() => { setMenuOpen(false) }, [pathname])
 
-  const navBg = scrolled
-    ? 'bg-white/95 backdrop-blur-xl shadow-sm'
-    : 'bg-white/80 backdrop-blur-md'
-
   return (
     <>
       <header
-        className={cn(
-          'fixed top-0 left-0 right-0 z-50 transition-all duration-500',
-          navBg
-        )}
+        style={{ background: '#ffffff', borderBottom: '1px solid #f0ece6', boxShadow: scrolled ? '0 2px 16px rgba(0,0,0,0.08)' : 'none' }}
+        className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
       >
         <div className="section-max px-6 md:px-10 flex items-center justify-between py-3">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
             <LogoSVG className="w-11 h-auto transition-transform duration-300 group-hover:scale-105" />
             <div className="leading-tight">
-              <span className="block text-xs font-semibold tracking-widest uppercase opacity-70 font-body text-brand-dark">The Little</span>
-              <span className="block text-lg font-body font-bold text-brand-red">Garimayans</span>
+              <span style={{ color: '#5C5C7A', fontSize: '0.7rem', letterSpacing: '0.12em', textTransform: 'uppercase', fontWeight: 600, display: 'block' }}>The Little</span>
+              <span style={{ color: '#99292D', fontSize: '1.1rem', fontWeight: 700, display: 'block' }}>Garimayans</span>
             </div>
           </Link>
 
@@ -70,7 +64,8 @@ export function Header() {
               link.children ? (
                 <div key="more" className="relative" onMouseEnter={() => setDropOpen(true)} onMouseLeave={() => setDropOpen(false)}>
                   <button
-                    className="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 font-body text-brand-dark hover:text-brand-red"
+                    style={{ color: '#1A1A2E', fontSize: '0.875rem', fontWeight: 600 }}
+                    className="flex items-center gap-1 px-4 py-2 rounded-full transition-all duration-200 hover:text-brand-red"
                   >
                     {link.label}
                     <ChevronDown className={cn('w-3.5 h-3.5 transition-transform duration-200', dropOpen && 'rotate-180')} />
@@ -88,7 +83,7 @@ export function Header() {
                           <Link
                             key={sub.href}
                             href={sub.href}
-                            className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:text-brand-red hover:bg-brand-cream/50 transition-colors font-body"
+                            className="flex items-center gap-2 px-4 py-2.5 text-sm text-gray-700 hover:text-brand-red hover:bg-brand-cream/50 transition-colors"
                           >
                             {sub.label}
                           </Link>
@@ -101,11 +96,12 @@ export function Header() {
                 <Link
                   key={link.href}
                   href={link.href!}
+                  style={link.highlight ? {} : { color: '#1A1A2E', fontSize: '0.875rem', fontWeight: 600 }}
                   className={cn(
-                    'px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 font-body',
+                    'px-4 py-2 rounded-full transition-all duration-200',
                     link.highlight
-                      ? 'bg-gradient-to-r from-brand-gold to-[#F07D15] text-white shadow-brand-gold hover:shadow-lg hover:-translate-y-0.5 ml-2'
-                      : 'text-brand-dark hover:text-brand-red hover:bg-brand-cream'
+                      ? 'bg-gradient-to-r from-brand-gold to-[#F07D15] text-white text-sm font-bold shadow-brand-gold hover:shadow-lg hover:-translate-y-0.5 ml-2'
+                      : 'hover:text-brand-red hover:bg-brand-cream'
                   )}
                 >
                   {link.label}
@@ -114,7 +110,7 @@ export function Header() {
             )}
             <Link
               href="/admissions"
-              className="ml-2 px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-brand-red to-brand-pink text-white shadow-brand hover:shadow-brand-pink hover:-translate-y-0.5 transition-all duration-300 font-body"
+              className="ml-2 px-5 py-2.5 rounded-full text-sm font-bold bg-gradient-to-r from-brand-red to-brand-pink text-white hover:-translate-y-0.5 transition-all duration-300"
             >
               Enroll Now ✨
             </Link>
@@ -123,7 +119,8 @@ export function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className="lg:hidden p-2 rounded-xl transition-colors text-brand-dark"
+            style={{ color: '#1A1A2E' }}
+            className="lg:hidden p-2 rounded-xl transition-colors"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
