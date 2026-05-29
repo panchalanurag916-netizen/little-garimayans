@@ -8,26 +8,18 @@ import { AnimatedCounter } from '@/components/animations/AnimatedCounter'
 
 export const metadata: Metadata = {
   title: 'About Us',
-  description: 'Learn about The Little Garimayans mission, values, SPACE framework, and our dedicated team of early childhood educators.',
+  description: 'Learn about The Little Garimayans mission, values, SPARK Curriculum, and our dedicated team of early childhood educators.',
 }
 
 const values = [
   { emoji: '🌟', title: 'Child-Centric',   desc: 'Every decision, every activity, every interaction is designed around the child\'s wellbeing and growth.' },
-  { emoji: '🧠', title: 'Research-Backed', desc: 'Our SPACE curriculum is built on the latest findings in early childhood development and neuroscience.' },
+  { emoji: '🧠', title: 'Research-Backed', desc: 'Our SPARK Curriculum is built on NCF-FS 2022, NEP 2020, Montessori principles, and the latest early childhood development research.' },
   { emoji: '💛', title: 'Warmth & Safety', desc: 'We create environments where children feel safe, loved, and free to explore without fear of failure.' },
   { emoji: '🌍', title: 'Inclusive',       desc: 'We celebrate diversity and create spaces where every child — regardless of background — can thrive.' },
   { emoji: '🚀', title: 'Future-Ready',    desc: 'We prepare children for a rapidly changing world through creativity, critical thinking, and adaptability.' },
   { emoji: '🤝', title: 'Community',       desc: 'We believe in building strong partnerships with parents and communities for holistic child development.' },
 ]
 
-const milestones = [
-  { year: '2018', event: 'The Little Garimayans founded with a single vision: redefine preschool education in India.' },
-  { year: '2019', event: 'SPACE framework developed and first pilot centers launched across 3 cities.' },
-  { year: '2020', event: 'Launched parent engagement portal and virtual learning modules during COVID-19.' },
-  { year: '2021', event: 'Expanded to 20+ franchise centers. Crossed 2,000 enrolled children.' },
-  { year: '2022', event: 'Received recognition as one of India\'s Top 10 Preschool Brands.' },
-  { year: '2023', event: '50+ centers operational. 5,000+ happy children. Franchise available Pan India.' },
-]
 
 export default function AboutPage() {
   return (
@@ -66,7 +58,7 @@ export default function AboutPage() {
               <div className="text-4xl mb-4">🎯</div>
               <h2 className="font-display font-bold text-brand-dark text-2xl mb-3">Our Mission</h2>
               <p className="text-brand-soft font-body leading-relaxed">
-                To nurture India&apos;s youngest learners through the SPACE framework — creating safe, stimulating, and joyful
+                To nurture India&apos;s youngest learners through the SPARK Curriculum — creating safe, stimulating, and joyful
                 environments where every child can discover their unique potential and grow into confident, compassionate,
                 and creative individuals.
               </p>
@@ -117,28 +109,6 @@ export default function AboutPage() {
             ))}
           </div>
 
-          {/* Timeline */}
-          <div className="text-center mb-12">
-            <SectionBadge className="mb-4">Our Journey</SectionBadge>
-            <h2 className="font-display font-bold text-brand-dark" style={{ fontSize: 'clamp(1.8rem, 3.5vw, 2.8rem)' }}>
-              A Journey of <span className="text-gradient-brand">Impact</span>
-            </h2>
-          </div>
-          <div className="relative">
-            <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-brand-gold/30 md:-translate-x-0.5" />
-            <div className="flex flex-col gap-8">
-              {milestones.map(({ year, event }, i) => (
-                <div key={year} className={`relative flex items-start gap-6 md:gap-0 ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                  <div className="md:w-1/2 pl-16 md:pl-0 md:pr-12 md:text-right" style={{ order: i % 2 === 0 ? 1 : 3 }}>
-                    <div className="font-display font-bold text-brand-gold text-xl mb-1">{year}</div>
-                    <p className="text-brand-soft font-body text-sm leading-relaxed">{event}</p>
-                  </div>
-                  <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 w-5 h-5 rounded-full bg-brand-red border-4 border-white shadow-sm mt-1 flex-shrink-0" style={{ order: 2 }} />
-                  <div className="hidden md:block md:w-1/2" style={{ order: i % 2 === 0 ? 3 : 1 }} />
-                </div>
-              ))}
-            </div>
-          </div>
         </section>
 
         {/* CTA */}
