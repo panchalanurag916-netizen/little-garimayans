@@ -33,7 +33,6 @@ export function Header() {
   const [menuOpen, setMenuOpen]     = useState(false)
   const [dropOpen, setDropOpen]     = useState(false)
   const pathname = usePathname()
-  const isHome   = pathname === '/'
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -43,9 +42,9 @@ export function Header() {
 
   useEffect(() => { setMenuOpen(false) }, [pathname])
 
-  const navBg = scrolled || !isHome
+  const navBg = scrolled
     ? 'bg-white/95 backdrop-blur-xl shadow-sm'
-    : 'bg-transparent'
+    : 'bg-white/80 backdrop-blur-md'
 
   return (
     <>
@@ -55,12 +54,12 @@ export function Header() {
           navBg
         )}
       >
-        <div className="section-max px-6 md:px-10 h-18 flex items-center justify-between py-3">
+        <div className="section-max px-6 md:px-10 flex items-center justify-between py-3">
           {/* Logo */}
           <Link href="/" className="flex items-center gap-3 group flex-shrink-0">
             <LogoSVG className="w-11 h-auto transition-transform duration-300 group-hover:scale-105" />
-            <div className={cn('leading-tight transition-colors duration-300', scrolled || !isHome ? 'text-brand-dark' : 'text-white')}>
-              <span className="block text-xs font-semibold tracking-widest uppercase opacity-70 font-body">The Little</span>
+            <div className="leading-tight">
+              <span className="block text-xs font-semibold tracking-widest uppercase opacity-70 font-body text-brand-dark">The Little</span>
               <span className="block text-lg font-body font-bold text-brand-red">Garimayans</span>
             </div>
           </Link>
@@ -71,10 +70,7 @@ export function Header() {
               link.children ? (
                 <div key="more" className="relative" onMouseEnter={() => setDropOpen(true)} onMouseLeave={() => setDropOpen(false)}>
                   <button
-                    className={cn(
-                      'flex items-center gap-1 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 font-body',
-                      scrolled || !isHome ? 'text-brand-dark hover:text-brand-red' : 'text-white/80 hover:text-white'
-                    )}
+                    className="flex items-center gap-1 px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 font-body text-brand-dark hover:text-brand-red"
                   >
                     {link.label}
                     <ChevronDown className={cn('w-3.5 h-3.5 transition-transform duration-200', dropOpen && 'rotate-180')} />
@@ -109,9 +105,7 @@ export function Header() {
                     'px-4 py-2 rounded-full text-sm font-semibold transition-all duration-200 font-body',
                     link.highlight
                       ? 'bg-gradient-to-r from-brand-gold to-[#F07D15] text-white shadow-brand-gold hover:shadow-lg hover:-translate-y-0.5 ml-2'
-                      : scrolled || !isHome
-                        ? 'text-brand-dark hover:text-brand-red hover:bg-brand-cream'
-                        : 'text-white/80 hover:text-white hover:bg-white/10'
+                      : 'text-brand-dark hover:text-brand-red hover:bg-brand-cream'
                   )}
                 >
                   {link.label}
@@ -129,7 +123,7 @@ export function Header() {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(!menuOpen)}
-            className={cn('lg:hidden p-2 rounded-xl transition-colors', scrolled || !isHome || menuOpen ? 'text-brand-dark' : 'text-white')}
+            className="lg:hidden p-2 rounded-xl transition-colors text-brand-dark"
             aria-label="Toggle menu"
           >
             {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}

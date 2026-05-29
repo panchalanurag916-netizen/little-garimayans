@@ -195,8 +195,8 @@ export function ProgramsSection() {
         </div>
 
         {/* NCF-FS note */}
-        <div className="mt-10 flex flex-col items-center gap-4">
-          <p className="text-sm text-brand-soft font-body text-center">
+        <div className="mt-10 max-w-xl mx-auto text-center flex flex-col items-center gap-3">
+          <p className="text-sm text-brand-soft font-body">
             All programs follow the <strong className="text-brand-dark">NCF-FS 2022</strong> framework with developmentally appropriate practices
           </p>
           <Link
